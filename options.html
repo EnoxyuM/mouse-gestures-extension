@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Mouse Gestures Settings</title>
+  <link rel="stylesheet" href="options.css">
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>Mouse Gestures</h1>
+      <div class="actions">
+        <button id="export-btn" class="secondary-btn">Export</button>
+        <button id="import-btn" class="secondary-btn">Import</button>
+        <input type="file" id="import-file" style="display: none;" accept=".json">
+      </div>
+    </header>
+
+    <main>
+      <div class="list-section">
+        <div class="section-header">
+          <h2>Gesture Actions</h2>
+          <button id="add-btn" class="primary-btn">+</button>
+        </div>
+        <div id="gestures-list" class="gestures-list">
+          <div class="empty-state" id="empty-state">No gestures created yet. Click "+" to add a new one.</div>
+        </div>
+      </div>
+
+      <!-- Editor Modal -->
+      <div id="editor-modal" class="modal hidden">
+        <div class="modal-content">
+          <h2 id="modal-title">Create Gesture</h2>
+          
+          <div class="form-group">
+            <label>Draw gesture: Hold RMB inside the box below and move your mouse</label>
+            <div id="gesture-recorder" class="recorder-box">
+              <span class="recorder-placeholder">Hold RMB and drag here</span>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label>Recognized Gesture:</label>
+            <div id="recorded-gesture-display" class="gesture-display">-</div>
+          </div>
+
+          <div class="form-group">
+            <label for="action-select">Select Action:</label>
+            <select id="action-select">
+              <option value="" disabled selected>-- Choose action --</option>
+              <option value="Add bookmark">Add bookmark</option>
+              <option value="History">History</option>
+              <option value="DL image">DL image</option>
+              <option value="Close right tabs">Close right tabs</option>
+              <option value="Copy tab">Copy tab</option>
+            </select>
+          </div>
+
+          <div class="modal-actions">
+            <button id="save-btn" class="primary-btn">Save</button>
+            <button id="cancel-btn" class="secondary-btn">Cancel</button>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+  <script src="options.js"></script>
+</body>
+</html>
