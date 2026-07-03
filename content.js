@@ -25,6 +25,18 @@ chrome.storage.onChanged.addListener((changes, areaName) => {
   }
 });
 
+// Listener for scroll actions from background script
+chrome.runtime.onMessage.addListener((message) => {
+  if (message.type === 'SCROLL_UP') {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  } else if (message.type === 'SCROLL_DOWN') {
+    window.scrollTo({
+      top: Math.max(document.body.scrollHeight, document.documentElement.scrollHeight),
+      behavior: 'smooth'
+    });
+  }
+});
+
 function initCanvas() {
   if (!canvas) {
     canvas = document.createElement('canvas');
@@ -99,7 +111,6 @@ document.addEventListener('mousemove', (e) => {
 
   points.push({ x: e.clientX, y: e.clientY });
 
-  // Redraw the path on Canvas
   if (ctx) {
     ctx.clearRect(0, 0, window.innerWidth, window.innerHeight);
     ctx.beginPath();
@@ -142,7 +153,6 @@ document.addEventListener('mousemove', (e) => {
     lastY = e.clientY;
   }
 
-  // Handle Tooltip logic
   if (tooltip) {
     const currentGesture = gesturePath.join('-');
     const action = registeredGestures[currentGesture];

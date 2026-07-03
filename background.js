@@ -28,6 +28,16 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
             await downloadImage(imageUrl);
           }
           break;
+        case 'UP':
+          if (tab && tab.id) {
+            chrome.tabs.sendMessage(tab.id, { type: 'SCROLL_UP' }).catch(() => {});
+          }
+          break;
+        case 'DOWN':
+          if (tab && tab.id) {
+            chrome.tabs.sendMessage(tab.id, { type: 'SCROLL_DOWN' }).catch(() => {});
+          }
+          break;
       }
     });
   }
